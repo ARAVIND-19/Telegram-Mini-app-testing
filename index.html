@@ -18,7 +18,7 @@
     <style>
         body {
             margin: 0;
-            padding: 15px;
+            padding: 10px;
             padding-bottom: 80px;
             /* Space for Telegram MainButton */
             font-family: 'Space Grotesk', 'Rubik', 'Arial Black', 'Impact', 'Helvetica Neue', Arial, sans-serif;
@@ -26,29 +26,34 @@
             background: var(--tg-theme-bg-color, #0a0a0a);
             color: var(--tg-theme-text-color, #ffffff);
             overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .cards-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .container {
             display: flex;
             flex-direction: column;
-            border: 4px solid #00ff88;
-            padding: 15px;
-            width: 250px;
+            border: 3px solid #00ff88;
+            padding: 10px;
+            width: auto;
             background: #1a1a1a;
-            box-shadow: 8px 8px 0 #000000;
+            box-shadow: 4px 4px 0 #000000;
             position: relative;
             transition: all 0.2s ease;
+            height: 100%;
+            box-sizing: border-box;
         }
 
-        .container:hover {
-            transform: translate(-4px, -4px);
-            box-shadow: 12px 12px 0 #000000;
+        .container:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 #000000;
         }
 
         .circle {
@@ -73,21 +78,24 @@
         }
 
         .image-holder {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .image-holder img {
             width: 100%;
-            height: 300px;
+            height: auto;
+            aspect-ratio: 1/1;
             object-fit: cover;
             display: block;
-            border: 4px solid #ffffff;
-            box-shadow: 4px 4px 0 #000000;
+            border: 3px solid #ffffff;
+            box-shadow: 3px 3px 0 #000000;
         }
 
         .details-holder {
             flex: 1;
             color: #ffffff;
+            display: flex;
+            flex-direction: column;
         }
 
         .details-holder h2 {
@@ -95,20 +103,21 @@
         }
 
         .product-name {
-            font-size: 18px;
+            font-size: 14px;
             font-weight: 900;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             color: #ffffff;
             display: block;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            line-height: 1.2;
         }
 
         .product-price {
-            font-size: 24px;
+            font-size: 18px;
             font-weight: 900;
             color: #00ff88;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: block;
             text-shadow: 2px 2px 0 #000000;
         }
@@ -116,22 +125,22 @@
         .add-to-cart {
             background: greenyellow;
             color: #ffffff;
-            border: 3px solid #000000;
-            padding: 12px 20px;
+            border: 2px solid #000000;
+            padding: 8px 10px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 900;
-            margin-top: 10px;
+            margin-top: auto;
             width: 100%;
             text-transform: uppercase;
-            box-shadow: 4px 4px 0 #000000;
+            box-shadow: 3px 3px 0 #000000;
             transition: all 0.2s ease;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
-        .add-to-cart:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0 #000000;
+        .add-to-cart:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 #000000;
         }
 
         .button-group {
@@ -222,9 +231,15 @@
 
         .filter-buttons {
             display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 10px;
+            padding-bottom: 10px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .filter-buttons::-webkit-scrollbar {
+            display: none;
         }
 
         .filter-btn {
@@ -239,6 +254,7 @@
             text-transform: uppercase;
             box-shadow: 4px 4px 0 #000000;
             letter-spacing: 1px;
+            flex-shrink: 0;
         }
 
         .filter-btn:nth-child(2n) {
@@ -574,6 +590,11 @@
         tg.ready();
         tg.expand();
 
+        // Ensure Telegram MainButton is hidden (we removed the checkout button)
+        if (tg && tg.MainButton && typeof tg.MainButton.hide === 'function') {
+            try { tg.MainButton.hide(); } catch (e) { /* ignore */ }
+        }
+
         // Global variables
         let productsData = null;
         let products = [];
@@ -762,8 +783,7 @@
             // Haptic feedback
             tg.HapticFeedback.impactOccurred('light');
 
-            // Update MainButton and Order Badge
-            updateMainButton();
+            // Update Order Badge (MainButton removed)
             updateOrderBadge();
         }
 
@@ -775,8 +795,7 @@
             // Haptic feedback
             tg.HapticFeedback.selectionChanged();
 
-            // Update MainButton and Order Badge
-            updateMainButton();
+            // Update Order Badge (MainButton removed)
             updateOrderBadge();
         }
 
@@ -789,25 +808,30 @@
                 // Haptic feedback
                 tg.HapticFeedback.selectionChanged();
 
-                // Update MainButton and Order Badge
-                updateMainButton();
+                // Update Order Badge (MainButton removed)
                 updateOrderBadge();
             }
         }
 
         function removeFromCart(id) {
             delete cartState[id];
-            document.getElementById(`quantity-${id}`).textContent = 1;
-            document.getElementById(`badge-${id}`).textContent = 1;
-            document.getElementById(`badge-${id}`).classList.remove('show');
-            document.getElementById(`qty-${id}`).classList.remove('show');
-            document.getElementById(`remove-${id}`).classList.remove('show');
+            const qtyEl = document.getElementById(`quantity-${id}`);
+            const badgeEl = document.getElementById(`badge-${id}`);
+            const qtyWrap = document.getElementById(`qty-${product.id}`);
+            const removeBtn = document.getElementById(`remove-${id}`);
 
-            // Haptic feedback
-            tg.HapticFeedback.notificationOccurred('warning');
+            if (qtyEl) qtyEl.textContent = 1;
+            if (badgeEl) {
+                badgeEl.textContent = 1;
+                badgeEl.classList.remove('show');
+            }
+            if (qtyWrap) qtyWrap.classList.remove('show');
+            if (removeBtn) removeBtn.classList.remove('show');
 
-            // Update MainButton and Order Badge
-            updateMainButton();
+            // Haptic feedback (guarded)
+            tg && tg.HapticFeedback && tg.HapticFeedback.notificationOccurred('warning');
+
+            // Update Order Badge (MainButton removed)
             updateOrderBadge();
         }
 
@@ -819,7 +843,7 @@
             if (itemCount === 0) {
                 modalBody.innerHTML = `
                     <div class="empty-cart-message">
-                        <div class="empty-cart-icon">\ud83d\uded2</div>
+                        <div class="empty-cart-icon">🛒</div>
                         <div>Your cart is empty!</div>
                         <div style="font-size: 16px; margin-top: 10px; font-weight: 400;">Add some items to get started.</div>
                     </div>
@@ -842,9 +866,9 @@
                             <div class="order-item-details">
                                 <span class="order-item-qty">Qty: ${cartState[productId]}</span>
                                 <span>×</span>
-                                <span>\u20b9${product.price}</span>
+                                <span>₹${product.price}</span>
                                 <span>=</span>
-                                <span class="order-item-price">\u20b9${subtotal}</span>
+                                <span class="order-item-price">₹${subtotal}</span>
                             </div>
                         </div>
                     `;
@@ -855,7 +879,7 @@
             orderHTML += `
                 <div class="order-total">
                     <div class="order-total-label">Total Amount</div>
-                    <div class="order-total-amount">\u20b9${total}</div>
+                    <div class="order-total-amount">₹${total}</div>
                     <div class="order-total-items">${itemCount} item${itemCount !== 1 ? 's' : ''}</div>
                 </div>
             `;
@@ -941,46 +965,6 @@
 
             return { total, itemCount };
         }
-
-        // Update Telegram MainButton
-        function updateMainButton() {
-            const { total, itemCount } = calculateTotal();
-
-            if (itemCount > 0) {
-                tg.MainButton.setText(`Checkout - ₹${total} (${itemCount} items)`);
-                tg.MainButton.show();
-            } else {
-                tg.MainButton.hide();
-            }
-        }
-
-        // Handle MainButton click
-        tg.MainButton.onClick(() => {
-            const { total, itemCount } = calculateTotal();
-            const orderData = {
-                items: Object.keys(cartState).map(productId => {
-                    const product = products.find(p => p.id === productId);
-                    return {
-                        id: productId,
-                        name: product.name,
-                        price: product.price,
-                        quantity: cartState[productId],
-                        subtotal: product.price * cartState[productId]
-                    };
-                }),
-                total: total,
-                itemCount: itemCount
-            };
-
-            // Send data back to bot
-            tg.sendData(JSON.stringify(orderData));
-
-            // Haptic feedback
-            tg.HapticFeedback.notificationOccurred('success');
-        });
-
-        // Initialize the application by fetching products
-        fetchProducts();
     </script>
 </body>
 
