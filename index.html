@@ -1,56 +1,987 @@
 <!DOCTYPE html>
 <html lang="en">
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Basic Telegram WebApp</title>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      margin: 0;
-      padding: 20px;
-    }
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      max-width: 400px;
-      margin: auto;
-      text-align: center;
-    }
-    button {
-      padding: 12px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      margin-top: 10px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Shop - Telegram Mini App</title>
+
+    <!-- Telegram Web App SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <!-- Google Fonts for Neo-Brutalism -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Rubik:wght@900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 15px;
+            padding-bottom: 80px;
+            /* Space for Telegram MainButton */
+            font-family: 'Space Grotesk', 'Rubik', 'Arial Black', 'Impact', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 700;
+            background: var(--tg-theme-bg-color, #0a0a0a);
+            color: var(--tg-theme-text-color, #ffffff);
+            overflow-x: hidden;
+        }
+
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            border: 4px solid #00ff88;
+            padding: 15px;
+            width: 250px;
+            background: #1a1a1a;
+            box-shadow: 8px 8px 0 #000000;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .container:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0 #000000;
+        }
+
+        .circle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 45px;
+            height: 45px;
+            background: #ffff00;
+            border: 3px solid #000000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: #000000;
+            font-weight: 900;
+            font-size: 18px;
+            box-shadow: 4px 4px 0 #000000;
+        }
+
+        .circle.show {
+            display: flex;
+        }
+
+        .image-holder {
+            margin-bottom: 15px;
+        }
+
+        .image-holder img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+            border: 4px solid #ffffff;
+            box-shadow: 4px 4px 0 #000000;
+        }
+
+        .details-holder {
+            flex: 1;
+            color: #ffffff;
+        }
+
+        .details-holder h2 {
+            color: #ffffff;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 8px;
+            color: #ffffff;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-price {
+            font-size: 24px;
+            font-weight: 900;
+            color: #00ff88;
+            margin-bottom: 10px;
+            display: block;
+            text-shadow: 2px 2px 0 #000000;
+        }
+
+        .add-to-cart {
+            background: greenyellow;
+            color: #ffffff;
+            border: 3px solid #000000;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 900;
+            margin-top: 10px;
+            width: 100%;
+            text-transform: uppercase;
+            box-shadow: 4px 4px 0 #000000;
+            transition: all 0.2s ease;
+            letter-spacing: 1px;
+        }
+
+        .add-to-cart:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 #000000;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .remove-btn {
+            background: red;
+            color: #ffffff;
+            border: 3px solid #000000;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 900;
+            flex: 1;
+            display: none;
+            text-transform: uppercase;
+            box-shadow: 4px 4px 0 #000000;
+            transition: all 0.2s ease;
+        }
+
+        .remove-btn.show {
+            display: block;
+        }
+
+        .remove-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 #000000;
+        }
+
+        .quantity-controls {
+            display: none;
+            gap: 10px;
+            margin-top: 10px;
+            align-items: center;
+        }
+
+        .quantity-controls.show {
+            display: flex;
+        }
+
+        .quantity-btn {
+            background: #00d4ff;
+            color: #000000;
+            border: 3px solid #000000;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: 900;
+            box-shadow: 3px 3px 0 #000000;
+            transition: all 0.2s ease;
+        }
+
+        .quantity-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0 #000000;
+        }
+
+        .quantity-display {
+            flex: 1;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 900;
+            color: #ffffff;
+        }
+
+        .filter-section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #1a1a1a;
+            border: 5px solid #00ff88;
+            box-shadow: 10px 10px 0 #000000;
+        }
+
+        .filter-title {
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            text-shadow: 4px -8px 0 #00ff88;
+            letter-spacing: 2px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: #ff0080;
+            color: #ffffff;
+            border: 3px solid #000000;
+            padding: 12px 24px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 900;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            box-shadow: 4px 4px 0 #000000;
+            letter-spacing: 1px;
+        }
+
+        .filter-btn:nth-child(2n) {
+            background: #00d4ff;
+            color: #000000;
+        }
+
+        .filter-btn:nth-child(3n) {
+            background: #ffff00;
+            color: #000000;
+        }
+
+        .filter-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 #000000;
+        }
+
+        .filter-btn.active {
+            background: #00ff88;
+            color: #000000;
+            border: 3px solid #000000;
+            box-shadow: 6px 6px 0 #000000;
+            transform: translate(-2px, -2px);
+        }
+
+        .product-count {
+            text-align: center;
+            color: #ffffff;
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            background: #1a1a1a;
+            padding: 15px;
+            border: 4px solid #00ff88;
+            box-shadow: 6px 6px 0 #000000;
+            letter-spacing: 2px;
+        }
+
+        .user-info {
+            background: #1a1a1a;
+            border: 4px solid #00d4ff;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 6px 6px 0 #000000;
+            text-align: center;
+        }
+
+        .user-info h3 {
+            margin: 0 0 5px 0;
+            color: #00d4ff;
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+
+        .user-info p {
+            margin: 0;
+            color: #ffffff;
+            font-size: 14px;
+        }
+
+        .order-button {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: #ff0080;
+            color: #ffffff;
+            border: 4px solid #000000;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 900;
+            text-transform: uppercase;
+            box-shadow: 6px 6px 0 #000000;
+            transition: all 0.2s ease;
+            z-index: 1000;
+            letter-spacing: 1px;
+        }
+
+        .order-button:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0 #000000;
+        }
+
+        .order-button:active {
+            transform: translate(0, 0);
+            box-shadow: 4px 4px 0 #000000;
+        }
+
+        .order-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ffff00;
+            color: #000000;
+            border: 3px solid #000000;
+            width: 28px;
+            height: 28px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 900;
+            box-shadow: 3px 3px 0 #000000;
+        }
+
+        .order-badge.show {
+            display: flex;
+        }
+
+        /* Modal Popup Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #1a1a1a;
+            border: 5px solid #00ff88;
+            box-shadow: 12px 12px 0 #000000;
+            max-width: 500px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            background: #00ff88;
+            color: #000000;
+            padding: 20px;
+            border-bottom: 5px solid #000000;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 28px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff0080;
+            color: #ffffff;
+            border: 3px solid #000000;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: 900;
+            box-shadow: 4px 4px 0 #000000;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 #000000;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .order-item {
+            background: #0a0a0a;
+            border: 4px solid #00d4ff;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 6px 6px 0 #000000;
+        }
+
+        .order-item-name {
+            font-size: 18px;
+            font-weight: 900;
+            color: #00d4ff;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .order-item-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            font-size: 16px;
+        }
+
+        .order-item-qty {
+            color: #ffff00;
+            font-weight: 900;
+        }
+
+        .order-item-price {
+            color: #00ff88;
+            font-weight: 900;
+        }
+
+        .order-total {
+            background: #ff0080;
+            color: #ffffff;
+            border: 5px solid #000000;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 8px 8px 0 #000000;
+            text-align: center;
+        }
+
+        .order-total-label {
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+        }
+
+        .order-total-amount {
+            font-size: 36px;
+            font-weight: 900;
+            text-shadow: 3px 3px 0 #000000;
+        }
+
+        .order-total-items {
+            font-size: 14px;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+
+        .empty-cart-message {
+            text-align: center;
+            padding: 40px 20px;
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        .empty-cart-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .modal-footer {
+            padding: 20px;
+            border-top: 5px solid #000000;
+            background: #1a1a1a;
+            position: sticky;
+            bottom: 0;
+            z-index: 10;
+        }
+
+        .place-order-btn {
+            background: #00ff88;
+            color: #000000;
+            border: 4px solid #000000;
+            padding: 15px;
+            width: 100%;
+            font-size: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 6px 6px 0 #000000;
+            transition: all 0.2s ease;
+            letter-spacing: 1px;
+        }
+
+        .place-order-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0 #000000;
+            background: #00e676;
+        }
+
+        .place-order-btn:active {
+            transform: translate(0, 0);
+            box-shadow: 4px 4px 0 #000000;
+        }
+    </style>
 </head>
+
 <body>
-  <div class="card">
-    <h2>Telegram WebApp</h2>
-    <p id="username">Loading...</p>
-    <button id="closeBtn">Close WebApp</button>
-  </div>
+    <!-- Order Button -->
+    <button class="order-button" onclick="showOrderSummary()">
+        🛒 Orders
+        <div class="order-badge" id="orderBadge">0</div>
+    </button>
 
-  <script>
-    const tg = window.Telegram.WebApp;
-    tg.expand();
+    <!-- User Info Section -->
+    <div class="user-info" id="userInfo" style="display: none;">
+        <h3 id="userName">Welcome!</h3>
+        <p id="userDetails"></p>
+    </div>
 
-    // Show user info
-    const user = tg.initDataUnsafe?.user;
-    document.getElementById("username").innerText = user
-      ? `Hello, ${user.first_name}`
-      : "Hello, user!";
+    <div class="filter-section">
+        <div class="filter-title">Shop by Category</div>
+        <div class="filter-buttons" id="filterButtons"></div>
+    </div>
 
-    // Close WebApp
-    document.getElementById("closeBtn").onclick = () => tg.close();
-  </script>
+    <div class="product-count" id="productCount"></div>
+    <div class="cards-container" id="cardsContainer"></div>
+
+    <!-- Order Modal -->
+    <div class="modal-overlay" id="orderModal" onclick="closeOrderModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2>🛒 Your Order</h2>
+                <button class="modal-close" onclick="closeOrderModal()">×</button>
+            </div>
+            <div class="modal-body" id="orderModalBody">
+                <!-- Order items will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Telegram Web App
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand();
+
+        // Global variables
+        let productsData = null;
+        let products = [];
+        const cartState = {};
+        let activeFilter = 'all';
+        let categories = [];
+
+        // API endpoint - change this to your actual API URL
+        const API_URL = './products.json';
+
+        // Display user info if available
+        if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+            const user = tg.initDataUnsafe.user;
+            document.getElementById('userInfo').style.display = 'block';
+            document.getElementById('userName').textContent = `Hello, ${user.first_name}!`;
+            document.getElementById('userDetails').textContent = user.username ? `@${user.username}` : 'Telegram User';
+        }
+
+        // Fetch products from API
+        async function fetchProducts() {
+            try {
+                showLoading();
+                const response = await fetch(API_URL);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                productsData = await response.json();
+
+                // Flatten the nested structure into a single array
+                products = Object.values(productsData.inventory).flat();
+
+                // Get all unique categories
+                categories = Object.keys(productsData.inventory);
+
+                // Initialize the page
+                hideLoading();
+                initializeFilters();
+                renderCards();
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                showError('Failed to load products. Please try again later.');
+            }
+        }
+
+        function showLoading() {
+            const container = document.getElementById('cardsContainer');
+            const productCountEl = document.getElementById('productCount');
+            container.innerHTML = '<div style="text-align: center; color: #00ff88; font-size: 24px; padding: 50px; font-weight: 900;">LOADING PRODUCTS...</div>';
+            productCountEl.textContent = '';
+        }
+
+        function hideLoading() {
+            // Loading message will be replaced by renderCards()
+        }
+
+        function showError(message) {
+            const container = document.getElementById('cardsContainer');
+            const productCountEl = document.getElementById('productCount');
+            container.innerHTML = `<div style="text-align: center; color: #ff0080; font-size: 20px; padding: 50px; font-weight: 900; border: 4px solid #ff0080; background: #1a1a1a; box-shadow: 8px 8px 0 #000000;">${message}</div>`;
+            productCountEl.textContent = '';
+        }
+
+        function createCard(product) {
+            return `
+    <div class="container">
+        <div class="circle" id="badge-${product.id}">
+            ${cartState[product.id] || 1}
+        </div>
+
+        <div class="image-holder">
+            <img src="${product.image}" alt="${product.name}">
+        </div>
+
+        <div class="details-holder">
+            <span class="product-name">${product.name}</span>
+            <span class="product-price">₹${product.price}</span>
+
+            <button class="add-to-cart" onclick="showCart('${product.id}')">
+                Add to Cart
+            </button>
+
+            <div class="button-group">
+                <button class="remove-btn" id="remove-${product.id}" onclick="removeFromCart('${product.id}')">
+                    Remove
+                </button>
+            </div>
+
+            <div class="quantity-controls" id="qty-${product.id}">
+                <button class="quantity-btn" onclick="decreaseQty('${product.id}')">-</button>
+
+                <div class="quantity-display" id="quantity-${product.id}">
+                    ${cartState[product.id] || 1}
+                </div>
+
+                <button class="quantity-btn" onclick="increaseQty('${product.id}')">+</button>
+            </div>
+        </div>
+    </div>
+`;
+        }
+
+        function initializeFilters() {
+            const filterButtonsContainer = document.getElementById('filterButtons');
+
+            // Clear existing buttons
+            filterButtonsContainer.innerHTML = '';
+
+            // Add "All" button
+            const allButton = document.createElement('button');
+            allButton.className = 'filter-btn active';
+            allButton.textContent = '🌟 All Products';
+            allButton.onclick = (event) => filterProducts('all', event);
+            filterButtonsContainer.appendChild(allButton);
+
+            // Add category buttons
+            categories.forEach(category => {
+                const button = document.createElement('button');
+                button.className = 'filter-btn';
+                button.textContent = category.replace(/_/g, ' ');
+                button.onclick = (event) => filterProducts(category, event);
+                filterButtonsContainer.appendChild(button);
+            });
+        }
+
+        function filterProducts(category, event) {
+            activeFilter = category;
+
+            // Update active button state
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            if (event && event.target) {
+                event.target.classList.add('active');
+            } else {
+                // Fallback for 'All' button if event is not passed (e.g., initial load)
+                document.querySelector('.filter-btn').classList.add('active');
+            }
+
+            renderCards();
+        }
+
+        function renderCards() {
+            const container = document.getElementById('cardsContainer');
+            const productCountEl = document.getElementById('productCount');
+
+            // Filter products based on active filter
+            let filteredProducts = products;
+            if (activeFilter !== 'all') {
+                filteredProducts = products.filter(product => {
+                    // Find which category this product belongs to
+                    for (let category in productsData.inventory) {
+                        if (productsData.inventory[category].some(p => p.id === product.id)) {
+                            return category === activeFilter;
+                        }
+                    }
+                    return false;
+                });
+            }
+
+            container.innerHTML = filteredProducts.map(product => createCard(product)).join('');
+            productCountEl.textContent = `Showing ${filteredProducts.length} product${filteredProducts.length !== 1 ? 's' : ''}`;
+
+            // Restore cart state UI for items already in cart
+            filteredProducts.forEach(product => {
+                if (cartState[product.id] && cartState[product.id] > 0) {
+                    const badge = document.getElementById(`badge-${product.id}`);
+                    const qty = document.getElementById(`qty-${product.id}`);
+                    const remove = document.getElementById(`remove-${product.id}`);
+
+                    if (badge) badge.classList.add('show');
+                    if (qty) qty.classList.add('show');
+                    if (remove) remove.classList.add('show');
+                }
+            });
+        }
+
+        function showCart(id) {
+            if (!cartState[id]) {
+                cartState[id] = 1;
+            }
+            document.getElementById(`badge-${id}`).classList.add('show');
+            document.getElementById(`qty-${id}`).classList.add('show');
+            document.getElementById(`remove-${id}`).classList.add('show');
+
+            // Haptic feedback
+            tg.HapticFeedback.impactOccurred('light');
+
+            // Update MainButton and Order Badge
+            updateMainButton();
+            updateOrderBadge();
+        }
+
+        function increaseQty(id) {
+            cartState[id] = (cartState[id] || 1) + 1;
+            document.getElementById(`quantity-${id}`).textContent = cartState[id];
+            document.getElementById(`badge-${id}`).textContent = cartState[id];
+
+            // Haptic feedback
+            tg.HapticFeedback.selectionChanged();
+
+            // Update MainButton and Order Badge
+            updateMainButton();
+            updateOrderBadge();
+        }
+
+        function decreaseQty(id) {
+            if (cartState[id] > 1) {
+                cartState[id]--;
+                document.getElementById(`quantity-${id}`).textContent = cartState[id];
+                document.getElementById(`badge-${id}`).textContent = cartState[id];
+
+                // Haptic feedback
+                tg.HapticFeedback.selectionChanged();
+
+                // Update MainButton and Order Badge
+                updateMainButton();
+                updateOrderBadge();
+            }
+        }
+
+        function removeFromCart(id) {
+            delete cartState[id];
+            document.getElementById(`quantity-${id}`).textContent = 1;
+            document.getElementById(`badge-${id}`).textContent = 1;
+            document.getElementById(`badge-${id}`).classList.remove('show');
+            document.getElementById(`qty-${id}`).classList.remove('show');
+            document.getElementById(`remove-${id}`).classList.remove('show');
+
+            // Haptic feedback
+            tg.HapticFeedback.notificationOccurred('warning');
+
+            // Update MainButton and Order Badge
+            updateMainButton();
+            updateOrderBadge();
+        }
+
+        // Show order summary in modal
+        function showOrderSummary() {
+            const { total, itemCount } = calculateTotal();
+            const modalBody = document.getElementById('orderModalBody');
+
+            if (itemCount === 0) {
+                modalBody.innerHTML = `
+                    <div class="empty-cart-message">
+                        <div class="empty-cart-icon">\ud83d\uded2</div>
+                        <div>Your cart is empty!</div>
+                        <div style="font-size: 16px; margin-top: 10px; font-weight: 400;">Add some items to get started.</div>
+                    </div>
+                `;
+                document.getElementById('orderModal').classList.add('show');
+                tg.HapticFeedback.notificationOccurred('error');
+                return;
+            }
+
+            let orderHTML = '';
+
+            // Build order items
+            for (let productId in cartState) {
+                const product = products.find(p => p.id === productId);
+                if (product && cartState[productId] > 0) {
+                    const subtotal = product.price * cartState[productId];
+                    orderHTML += `
+                        <div class="order-item">
+                            <div class="order-item-name">${product.name}</div>
+                            <div class="order-item-details">
+                                <span class="order-item-qty">Qty: ${cartState[productId]}</span>
+                                <span>×</span>
+                                <span>\u20b9${product.price}</span>
+                                <span>=</span>
+                                <span class="order-item-price">\u20b9${subtotal}</span>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+
+            // Add total section
+            orderHTML += `
+                <div class="order-total">
+                    <div class="order-total-label">Total Amount</div>
+                    <div class="order-total-amount">\u20b9${total}</div>
+                    <div class="order-total-items">${itemCount} item${itemCount !== 1 ? 's' : ''}</div>
+                </div>
+            `;
+
+            // Add footer with Place Order button
+            orderHTML += `
+                <div class="modal-footer">
+                    <button class="place-order-btn" onclick="submitOrder()">
+                        ✅ Place Order
+                    </button>
+                </div>
+            `;
+
+            modalBody.innerHTML = orderHTML;
+            document.getElementById('orderModal').classList.add('show');
+            tg.HapticFeedback.impactOccurred('medium');
+        }
+
+        // Submit order and close app
+        function submitOrder() {
+            const { total, itemCount } = calculateTotal();
+
+            const orderData = {
+                items: Object.keys(cartState).map(productId => {
+                    const product = products.find(p => p.id === productId);
+                    return {
+                        id: productId,
+                        name: product.name,
+                        price: product.price,
+                        quantity: cartState[productId],
+                        subtotal: product.price * cartState[productId]
+                    };
+                }),
+                total: total,
+                itemCount: itemCount,
+                orderDate: new Date().toISOString()
+            };
+
+            // Haptic feedback
+            tg.HapticFeedback.notificationOccurred('success');
+
+            // Send data to bot
+            tg.sendData(JSON.stringify(orderData));
+
+            // Close the Mini App
+            tg.close();
+        }
+
+        // Close order modal
+        function closeOrderModal(event) {
+            // Only close if clicking overlay or close button
+            if (event && event.target.classList.contains('modal-overlay') || !event) {
+                document.getElementById('orderModal').classList.remove('show');
+                tg.HapticFeedback.impactOccurred('light');
+            }
+        }
+
+        // Update order badge
+        function updateOrderBadge() {
+            const { itemCount } = calculateTotal();
+            const badge = document.getElementById('orderBadge');
+
+            if (itemCount > 0) {
+                badge.textContent = itemCount;
+                badge.classList.add('show');
+            } else {
+                badge.classList.remove('show');
+            }
+        }
+
+        // Calculate total cart value
+        function calculateTotal() {
+            let total = 0;
+            let itemCount = 0;
+
+            for (let productId in cartState) {
+                const product = products.find(p => p.id === productId);
+                if (product && cartState[productId] > 0) {
+                    total += product.price * cartState[productId];
+                    itemCount += cartState[productId];
+                }
+            }
+
+            return { total, itemCount };
+        }
+
+        // Update Telegram MainButton
+        function updateMainButton() {
+            const { total, itemCount } = calculateTotal();
+
+            if (itemCount > 0) {
+                tg.MainButton.setText(`Checkout - ₹${total} (${itemCount} items)`);
+                tg.MainButton.show();
+            } else {
+                tg.MainButton.hide();
+            }
+        }
+
+        // Handle MainButton click
+        tg.MainButton.onClick(() => {
+            const { total, itemCount } = calculateTotal();
+            const orderData = {
+                items: Object.keys(cartState).map(productId => {
+                    const product = products.find(p => p.id === productId);
+                    return {
+                        id: productId,
+                        name: product.name,
+                        price: product.price,
+                        quantity: cartState[productId],
+                        subtotal: product.price * cartState[productId]
+                    };
+                }),
+                total: total,
+                itemCount: itemCount
+            };
+
+            // Send data back to bot
+            tg.sendData(JSON.stringify(orderData));
+
+            // Haptic feedback
+            tg.HapticFeedback.notificationOccurred('success');
+        });
+
+        // Initialize the application by fetching products
+        fetchProducts();
+    </script>
 </body>
+
 </html>
