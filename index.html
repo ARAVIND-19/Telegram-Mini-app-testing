@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Shop - Telegram Mini App</title>
+    <title>Grozto</title>
 
     <!-- Telegram Web App SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -20,11 +20,10 @@
             margin: 0;
             padding: 10px;
             padding-bottom: 80px;
-            /* Space for Telegram MainButton */
             font-family: 'Space Grotesk', 'Rubik', 'Arial Black', 'Impact', 'Helvetica Neue', Arial, sans-serif;
             font-weight: 700;
-            background: var(--tg-theme-bg-color, #0a0a0a);
-            color: var(--tg-theme-text-color, #ffffff);
+            background: var(--tg-theme-bg-color, #f5f5f5);
+            color: var(--tg-theme-text-color, #2c2c2c);
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
         }
@@ -40,20 +39,19 @@
         .container {
             display: flex;
             flex-direction: column;
-            border: 3px solid #00ff88;
+            border: 3px solid #4ecdc4;
             padding: 10px;
             width: auto;
-            background: #1a1a1a;
-            box-shadow: 4px 4px 0 #000000;
+            background: #ffffff;
             position: relative;
             transition: all 0.2s ease;
             height: 100%;
             box-sizing: border-box;
+            border-radius: 25px;
         }
 
         .container:active {
             transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0 #000000;
         }
 
         .circle {
@@ -62,15 +60,15 @@
             right: 10px;
             width: 45px;
             height: 45px;
-            background: #ffff00;
-            border: 3px solid #000000;
+            background: #ffd93d;
+            border: 3px solid #2c2c2c;
             display: none;
             align-items: center;
             justify-content: center;
-            color: #000000;
+            color: #2c2c2c;
             font-weight: 900;
             font-size: 18px;
-            box-shadow: 4px 4px 0 #000000;
+            border-radius: 50%;
         }
 
         .circle.show {
@@ -87,26 +85,26 @@
             aspect-ratio: 1/1;
             object-fit: cover;
             display: block;
-            border: 3px solid #ffffff;
-            box-shadow: 3px 3px 0 #000000;
+            border: 3px solid #e0e0e0;
+            border-radius: 15px;
         }
 
         .details-holder {
             flex: 1;
-            color: #ffffff;
+            color: #2c2c2c;
             display: flex;
             flex-direction: column;
         }
 
         .details-holder h2 {
-            color: #ffffff;
+            color: #2c2c2c;
         }
 
         .product-name {
             font-size: 14px;
             font-weight: 900;
             margin-bottom: 5px;
-            color: #ffffff;
+            color: #2c2c2c;
             display: block;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -116,16 +114,16 @@
         .product-price {
             font-size: 18px;
             font-weight: 900;
-            color: #00ff88;
+            color: #ff6b6b;
             margin-bottom: 8px;
             display: block;
-            text-shadow: 2px 2px 0 #000000;
+            text-shadow: none;
         }
 
         .add-to-cart {
-            background: greenyellow;
+            background: #4ecdc4;
             color: #ffffff;
-            border: 2px solid #000000;
+            border: 2px solid #2c2c2c;
             padding: 8px 10px;
             cursor: pointer;
             font-size: 12px;
@@ -133,14 +131,13 @@
             margin-top: auto;
             width: 100%;
             text-transform: uppercase;
-            box-shadow: 3px 3px 0 #000000;
             transition: all 0.2s ease;
             letter-spacing: 0.5px;
+            border-radius: 12px;
         }
 
         .add-to-cart:active {
             transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0 #000000;
         }
 
         .button-group {
@@ -150,9 +147,9 @@
         }
 
         .remove-btn {
-            background: red;
+            background: #ff6b6b;
             color: #ffffff;
-            border: 3px solid #000000;
+            border: 3px solid #2c2c2c;
             padding: 10px 20px;
             cursor: pointer;
             font-size: 14px;
@@ -160,8 +157,8 @@
             flex: 1;
             display: none;
             text-transform: uppercase;
-            box-shadow: 4px 4px 0 #000000;
             transition: all 0.2s ease;
+            border-radius: 12px;
         }
 
         .remove-btn.show {
@@ -170,7 +167,6 @@
 
         .remove-btn:hover {
             transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0 #000000;
         }
 
         .quantity-controls {
@@ -185,21 +181,20 @@
         }
 
         .quantity-btn {
-            background: #00d4ff;
-            color: #000000;
-            border: 3px solid #000000;
+            background: #95e1d3;
+            color: #2c2c2c;
+            border: 3px solid #2c2c2c;
             width: 45px;
             height: 45px;
             cursor: pointer;
             font-size: 24px;
             font-weight: 900;
-            box-shadow: 3px 3px 0 #000000;
             transition: all 0.2s ease;
+            border-radius: 12px;
         }
 
         .quantity-btn:hover {
             transform: translate(-2px, -2px);
-            box-shadow: 5px 5px 0 #000000;
         }
 
         .quantity-display {
@@ -207,25 +202,25 @@
             text-align: center;
             font-size: 20px;
             font-weight: 900;
-            color: #ffffff;
+            color: #2c2c2c;
         }
 
         .filter-section {
             margin-bottom: 30px;
             padding: 25px;
-            background: #1a1a1a;
-            border: 5px solid #00ff88;
-            box-shadow: 10px 10px 0 #000000;
+            background: #ffffff;
+            border: 5px solid #4ecdc4;
+            border-radius: 20px;
         }
 
         .filter-title {
-            color: #ffffff;
+            color: #2c2c2c;
             font-size: 32px;
             font-weight: 900;
-            margin-bottom: 20px;
             text-align: center;
+            margin-bottom: 30px;
             text-transform: uppercase;
-            text-shadow: 4px -8px 0 #00ff88;
+            text-shadow: 2px 2px 0 #e0e0e0;
             letter-spacing: 2px;
         }
 
@@ -234,7 +229,7 @@
             flex-wrap: nowrap;
             overflow-x: auto;
             gap: 10px;
-            padding-bottom: 10px;
+            padding-bottom: 1px;
             -webkit-overflow-scrolling: touch;
         }
 
@@ -243,76 +238,73 @@
         }
 
         .filter-btn {
-            background: #ff0080;
+            background: #ff9a9e;
             color: #ffffff;
-            border: 3px solid #000000;
             padding: 12px 24px;
             cursor: pointer;
             font-size: 14px;
-            font-weight: 900;
+            font-weight: 750;
             transition: all 0.2s ease;
             text-transform: uppercase;
-            box-shadow: 4px 4px 0 #000000;
             letter-spacing: 1px;
             flex-shrink: 0;
+            border-radius: 12px;
         }
 
         .filter-btn:nth-child(2n) {
-            background: #00d4ff;
-            color: #000000;
+            background: #95e1d3;
+            color: #2c2c2c;
         }
 
         .filter-btn:nth-child(3n) {
-            background: #ffff00;
-            color: #000000;
+            background: #ffd93d;
+            color: #2c2c2c;
         }
 
         .filter-btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0 #000000;
+            transform: translate(2px, 2px);
         }
 
         .filter-btn.active {
-            background: #00ff88;
-            color: #000000;
-            border: 3px solid #000000;
-            box-shadow: 6px 6px 0 #000000;
-            transform: translate(-2px, -2px);
+            background: #4ecdc4;
+            color: #ffffff;
+            border: 3px solid #2c2c2c;
+            transform: translate(-2px, 2px);
         }
 
         .product-count {
             text-align: center;
-            color: #ffffff;
+            color: #2c2c2c;
             font-size: 18px;
             margin-bottom: 20px;
             font-weight: 900;
             text-transform: uppercase;
-            background: #1a1a1a;
+            background: #ffffff;
             padding: 15px;
-            border: 4px solid #00ff88;
-            box-shadow: 6px 6px 0 #000000;
+            border: 4px solid #4ecdc4;
             letter-spacing: 2px;
+            border-radius: 15px;
         }
 
         .user-info {
-            background: #1a1a1a;
-            border: 4px solid #00d4ff;
+            background: #ffffff;
+            border: 4px solid #95e1d3;
             padding: 15px;
             margin-bottom: 20px;
-            box-shadow: 6px 6px 0 #000000;
             text-align: center;
+            border-radius: 15px;
         }
 
         .user-info h3 {
             margin: 0 0 5px 0;
-            color: #00d4ff;
+            color: #4ecdc4;
             font-size: 20px;
             text-transform: uppercase;
         }
 
         .user-info p {
             margin: 0;
-            color: #ffffff;
+            color: #2c2c2c;
             font-size: 14px;
         }
 
@@ -320,37 +312,34 @@
             position: fixed;
             top: 15px;
             right: 15px;
-            background: #ff0080;
+            background: #ff9a9e;
             color: #ffffff;
-            border: 4px solid #000000;
+            border: 4px solid #2c2c2c;
             padding: 12px 20px;
             cursor: pointer;
             font-size: 16px;
             font-weight: 900;
             text-transform: uppercase;
-            box-shadow: 6px 6px 0 #000000;
-            transition: all 0.2s ease;
             z-index: 1000;
             letter-spacing: 1px;
+            border-radius: 12px;
         }
 
         .order-button:hover {
             transform: translate(-2px, -2px);
-            box-shadow: 8px 8px 0 #000000;
         }
 
         .order-button:active {
             transform: translate(0, 0);
-            box-shadow: 4px 4px 0 #000000;
         }
 
         .order-badge {
             position: absolute;
             top: -8px;
             right: -8px;
-            background: #ffff00;
-            color: #000000;
-            border: 3px solid #000000;
+            background: #ffd93d;
+            color: #2c2c2c;
+            border: 3px solid #2c2c2c;
             width: 28px;
             height: 28px;
             display: none;
@@ -358,7 +347,7 @@
             justify-content: center;
             font-size: 14px;
             font-weight: 900;
-            box-shadow: 3px 3px 0 #000000;
+            border-radius: 50%;
         }
 
         .order-badge.show {
@@ -385,21 +374,21 @@
         }
 
         .modal-content {
-            background: #1a1a1a;
-            border: 5px solid #00ff88;
-            box-shadow: 12px 12px 0 #000000;
+            background: #ffffff;
+            border: 5px solid #4ecdc4;
             max-width: 500px;
             width: 100%;
             max-height: 80vh;
             overflow-y: auto;
             position: relative;
+            border-radius: 20px;
         }
 
         .modal-header {
-            background: #00ff88;
-            color: #000000;
+            background: #4ecdc4;
+            color: #ffffff;
             padding: 20px;
-            border-bottom: 5px solid #000000;
+            border-bottom: 5px solid #2c2c2c;
             position: sticky;
             top: 0;
             z-index: 10;
@@ -416,21 +405,19 @@
             position: absolute;
             top: 15px;
             right: 15px;
-            background: #ff0080;
+            background: #ff9a9e;
             color: #ffffff;
-            border: 3px solid #000000;
+            border: 3px solid #2c2c2c;
             width: 40px;
             height: 40px;
             cursor: pointer;
             font-size: 24px;
             font-weight: 900;
-            box-shadow: 4px 4px 0 #000000;
-            transition: all 0.2s ease;
+            border-radius: 10px;
         }
 
         .modal-close:hover {
             transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0 #000000;
         }
 
         .modal-body {
@@ -438,17 +425,17 @@
         }
 
         .order-item {
-            background: #0a0a0a;
-            border: 4px solid #00d4ff;
+            background: #f5f5f5;
+            border: 4px solid #95e1d3;
             padding: 15px;
             margin-bottom: 15px;
-            box-shadow: 6px 6px 0 #000000;
+            border-radius: 12px;
         }
 
         .order-item-name {
             font-size: 18px;
             font-weight: 900;
-            color: #00d4ff;
+            color: #4ecdc4;
             text-transform: uppercase;
             margin-bottom: 8px;
         }
@@ -457,28 +444,28 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: #ffffff;
+            color: #2c2c2c;
             font-size: 16px;
         }
 
         .order-item-qty {
-            color: #ffff00;
+            color: #ffd93d;
             font-weight: 900;
         }
 
         .order-item-price {
-            color: #00ff88;
+            color: #ff6b6b;
             font-weight: 900;
         }
 
         .order-total {
-            background: #ff0080;
+            background: #ff9a9e;
             color: #ffffff;
-            border: 5px solid #000000;
+            border: 5px solid #2c2c2c;
             padding: 20px;
             margin-top: 20px;
-            box-shadow: 8px 8px 0 #000000;
             text-align: center;
+            border-radius: 15px;
         }
 
         .order-total-label {
@@ -491,7 +478,7 @@
         .order-total-amount {
             font-size: 36px;
             font-weight: 900;
-            text-shadow: 3px 3px 0 #000000;
+            text-shadow: none;
         }
 
         .order-total-items {
@@ -503,7 +490,7 @@
         .empty-cart-message {
             text-align: center;
             padding: 40px 20px;
-            color: #ffffff;
+            color: #2c2c2c;
             font-size: 20px;
             font-weight: 900;
         }
@@ -515,37 +502,34 @@
 
         .modal-footer {
             padding: 20px;
-            border-top: 5px solid #000000;
-            background: #1a1a1a;
+            border-top: 5px solid #2c2c2c;
+            background: #ffffff;
             position: sticky;
             bottom: 0;
             z-index: 10;
         }
 
         .place-order-btn {
-            background: #00ff88;
-            color: #000000;
-            border: 4px solid #000000;
+            background: #4ecdc4;
+            color: #ffffff;
+            border: 4px solid #2c2c2c;
             padding: 15px;
             width: 100%;
             font-size: 20px;
             font-weight: 900;
             text-transform: uppercase;
             cursor: pointer;
-            box-shadow: 6px 6px 0 #000000;
-            transition: all 0.2s ease;
             letter-spacing: 1px;
+            border-radius: 12px;
         }
 
         .place-order-btn:hover {
             transform: translate(-2px, -2px);
-            box-shadow: 8px 8px 0 #000000;
-            background: #00e676;
+            background: #3db8ad;
         }
 
         .place-order-btn:active {
             transform: translate(0, 0);
-            box-shadow: 4px 4px 0 #000000;
         }
     </style>
 </head>
@@ -553,7 +537,7 @@
 <body>
     <!-- Order Button -->
     <button class="order-button" onclick="showOrderSummary()">
-        🛒 Orders
+        🛒
         <div class="order-badge" id="orderBadge">0</div>
     </button>
 
@@ -564,7 +548,7 @@
     </div>
 
     <div class="filter-section">
-        <div class="filter-title">Shop by Category</div>
+        <div class="filter-title">Grozto</div>
         <div class="filter-buttons" id="filterButtons"></div>
     </div>
 
@@ -667,8 +651,8 @@
             ${inCart ? cartState[product.id] : ''}
         </div>
 
-        <div class="image-holder">
-            <img src="${product.image}" alt="${product.name}">
+        <div class="image-holder" id="image-holder-${product.id}">
+            <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/200?text=${encodeURIComponent(product.name)}'">
         </div>
 
         <div class="details-holder">
@@ -976,7 +960,6 @@
         // Load products
         fetchProducts();
         // Ensure order badge reflects initial cart state
-        // a
         updateOrderBadge();
      </script>
  </body>

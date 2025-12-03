@@ -6,28 +6,28 @@
                 "name": "Milk (500ml)",
                 "price": 28,
                 "unit": "pack",
-                "image": "https://via.placeholder.com/250x300/4CAF50/ffffff?text=Milk"
+                "image":"/27002.jpg"
             },
             {
                 "id": "DE002",
                 "name": "Curd (500g)",
                 "price": 32,
                 "unit": "pack",
-                "image": "https://via.placeholder.com/250x300/4CAF50/ffffff?text=Curd"
+                "image":"/27002.jpg"
             },
             {
                 "id": "DE003",
                 "name": "Bread",
                 "price": 35,
                 "unit": "pack",
-                "image": "https://via.placeholder.com/250x300/4CAF50/ffffff?text=Bread"
+                "image":"/27002.jpg"
             },
             {
                 "id": "DE004",
                 "name": "Eggs (6 pcs)",
                 "price": 45,
                 "unit": "box",
-                "image": "https://via.placeholder.com/250x300/4CAF50/ffffff?text=Eggs"
+                "image":"/27002.jpg"
             }
         ],
         "groceries": [
@@ -36,35 +36,35 @@
                 "name": "Rice (1kg)",
                 "price": 55,
                 "unit": "kg",
-                "image": "https://via.placeholder.com/250x300/FF9800/ffffff?text=Rice"
+                "image":"/27002.jpg"
             },
             {
                 "id": "GR002",
                 "name": "Wheat Flour (1kg)",
                 "price": 48,
                 "unit": "kg",
-                "image": "https://via.placeholder.com/250x300/FF9800/ffffff?text=Wheat+Flour"
+                "image":"/27002.jpg"
             },
             {
                 "id": "GR003",
                 "name": "Sugar (1kg)",
                 "price": 45,
                 "unit": "kg",
-                "image": "https://via.placeholder.com/250x300/FF9800/ffffff?text=Sugar"
+                "image":"/27002.jpg"
             },
             {
                 "id": "GR004",
                 "name": "Toor Dal (1kg)",
                 "price": 110,
                 "unit": "kg",
-                "image": "https://via.placeholder.com/250x300/FF9800/ffffff?text=Toor+Dal"
+                "image":"/27002.jpg"
             },
             {
                 "id": "GR005",
                 "name": "Sunflower Oil (1L)",
                 "price": 140,
                 "unit": "litre",
-                "image": "https://via.placeholder.com/250x300/FF9800/ffffff?text=Oil"
+                "image":"/27002.jpg"
             }
         ],
         "snacks": [
@@ -73,28 +73,28 @@
                 "name": "Potato Chips",
                 "price": 20,
                 "unit": "pack",
-                "image": "https://via.placeholder.com/250x300/E91E63/ffffff?text=Chips"
+                "image":"/27002.jpg"
             },
             {
                 "id": "SN002",
                 "name": "Namkeen (200g)",
                 "price": 30,
                 "unit": "pack",
-                "image": "https://via.placeholder.com/250x300/E91E63/ffffff?text=Namkeen"
+                "image":"/27002.jpg"
             },
             {
                 "id": "SN003",
                 "name": "Biscuits",
                 "price": 10,
                 "unit": "pack",
-                "image": "https://via.placeholder.com/250x300/E91E63/ffffff?text=Biscuits"
+                "image":"/27002.jpg"
             },
             {
                 "id": "SN004",
                 "name": "Instant Noodles",
                 "price": 15,
                 "unit": "pack",
-                "image": "https://via.placeholder.com/250x300/E91E63/ffffff?text=Noodles"
+                "image":"/27002.jpg"
             }
         ],
         "beverages": [
@@ -103,21 +103,21 @@
                 "name": "Tea Powder (250g)",
                 "price": 90,
                 "unit": "pack",
-                "image": "https://via.placeholder.com/250x300/2196F3/ffffff?text=Tea"
+                "image":"/27002.jpg"
             },
             {
                 "id": "BV002",
                 "name": "Coffee (50g)",
                 "price": 70,
                 "unit": "bottle",
-                "image": "https://via.placeholder.com/250x300/2196F3/ffffff?text=Coffee"
+                "image":"/27002.jpg"
             },
             {
                 "id": "BV003",
                 "name": "Soft Drink (500ml)",
                 "price": 40,
                 "unit": "bottle",
-                "image": "https://via.placeholder.com/250x300/2196F3/ffffff?text=Soft+Drink"
+                "image":"/27002.jpg"
             }
         ],
         "personal_care": [
@@ -126,21 +126,21 @@
                 "name": "Bath Soap",
                 "price": 35,
                 "unit": "bar",
-                "image": "https://via.placeholder.com/250x300/9C27B0/ffffff?text=Soap"
+                "image":"/27002.jpg"
             },
             {
                 "id": "PC002",
                 "name": "Shampoo (100ml)",
                 "price": 55,
                 "unit": "bottle",
-                "image": "https://via.placeholder.com/250x300/9C27B0/ffffff?text=Shampoo"
+                "image":"/27002.jpg"
             },
             {
                 "id": "PC003",
                 "name": "Toothpaste (100g)",
                 "price": 55,
                 "unit": "tube",
-                "image": "https://via.placeholder.com/250x300/9C27B0/ffffff?text=Toothpaste"
+                "image":"/27002.jpg"
             }
         ],
         "household": [
@@ -149,37 +149,21 @@
                 "name": "Detergent Powder (1kg)",
                 "price": 70,
                 "unit": "kg",
-                "image": "https://via.placeholder.com/250x300/00BCD4/ffffff?text=Detergent"
+                "image":"/27002.jpg"
             },
             {
                 "id": "HH002",
                 "name": "Dishwashing Liquid (500ml)",
                 "price": 45,
                 "unit": "bottle",
-                "image": "https://via.placeholder.com/250x300/00BCD4/ffffff?text=Dishwash"
+                "image":"/27002.jpg"
             },
             {
                 "id": "HH003",
                 "name": "Floor Cleaner (1L)",
                 "price": 95,
                 "unit": "bottle",
-                "image": "https://via.placeholder.com/250x300/00BCD4/ffffff?text=Cleaner"
-            }
-        ],
-        "medical": [
-            {
-                "id": "MD001",
-                "name": "Paracetamol (strip)",
-                "price": 20,
-                "unit": "strip",
-                "image": "https://via.placeholder.com/250x300/F44336/ffffff?text=Paracetamol"
-            },
-            {
-                "id": "MD002",
-                "name": "ORS Packet",
-                "price": 18,
-                "unit": "pack",
-                "image": "https://via.placeholder.com/250x300/F44336/ffffff?text=ORS"
+                "image":"/27002.jpg"
             }
         ]
     }
