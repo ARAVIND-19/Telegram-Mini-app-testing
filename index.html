@@ -22,7 +22,7 @@
             padding-bottom: 80px;
             font-family: 'Space Grotesk', 'Rubik', 'Arial Black', 'Impact', 'Helvetica Neue', Arial, sans-serif;
             font-weight: 700;
-            background: var(--tg-theme-bg-color, #f5f5f5);
+            background: var(--tg-theme-bg-color, #f4f1de);
             color: var(--tg-theme-text-color, #2c2c2c);
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
@@ -578,7 +578,6 @@
                 try { tg.MainButton.hide(); } catch (e) { /* ignore */ }
             }
         }
-
         // Global variables
         let productsData = null;
         let products = [];
@@ -761,9 +760,9 @@
             if (!cartState[id]) {
                 cartState[id] = 1;
             }
-            document.getElementById(`badge-${id}`).classList.add('show');
             document.getElementById(`qty-${id}`).classList.add('show');
             document.getElementById(`remove-${id}`).classList.add('show');
+            document.getElementById(`badge-${id}`).classList.add('show');
 
             // Haptic feedback
             tg.HapticFeedback.impactOccurred('light');
@@ -914,6 +913,7 @@
 
             // Send data to bot
             tg.sendData(JSON.stringify(orderData));
+            tg.call_method('web_app_set_background_color', { color: '#F8EDD9' })
 
             // Close the Mini App
             tg.close();
@@ -961,7 +961,7 @@
         fetchProducts();
         // Ensure order badge reflects initial cart state
         updateOrderBadge();
-     </script>
- </body>
- 
- </html>
+    </script>
+</body>
+
+</html>
