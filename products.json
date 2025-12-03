@@ -163,7 +163,23 @@
                 "name": "Floor Cleaner (1L)",
                 "price": 95,
                 "unit": "bottle",
-                "image":"/27002.jpg"
+                "image": "https://via.placeholder.com/250x300/00BCD4/ffffff?text=Cleaner"
+            }
+        ],
+        "medical": [
+            {
+                "id": "MD001",
+                "name": "Paracetamol (strip)",
+                "price": 20,
+                "unit": "strip",
+                "image": "https://via.placeholder.com/250x300/F44336/ffffff?text=Paracetamol"
+            },
+            {
+                "id": "MD002",
+                "name": "ORS Packet",
+                "price": 18,
+                "unit": "pack",
+                "image": "https://via.placeholder.com/250x300/F44336/ffffff?text=ORS"
             }
         ]
     }
