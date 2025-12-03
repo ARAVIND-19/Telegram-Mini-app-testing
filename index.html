@@ -585,14 +585,14 @@
     </div>
 
     <script>
-        // Initialize Telegram Web App
-        const tg = window.Telegram.WebApp;
-        tg.ready();
-        tg.expand();
-
-        // Ensure Telegram MainButton is hidden (we removed the checkout button)
-        if (tg && tg.MainButton && typeof tg.MainButton.hide === 'function') {
-            try { tg.MainButton.hide(); } catch (e) { /* ignore */ }
+        // Initialize Telegram Web App (guarded — do not throw outside Telegram)
+        const tg = (window.Telegram && window.Telegram.WebApp) ? window.Telegram.WebApp : null;
+        if (tg) {
+            try { tg.ready && tg.ready(); tg.expand && tg.expand(); } catch (e) { /* ignore */ }
+            // Ensure Telegram MainButton is hidden (we removed the checkout button)
+            if (tg.MainButton && typeof tg.MainButton.hide === 'function') {
+                try { tg.MainButton.hide(); } catch (e) { /* ignore */ }
+            }
         }
 
         // Global variables
@@ -660,10 +660,11 @@
         }
 
         function createCard(product) {
+            const inCart = cartState[product.id] && cartState[product.id] > 0;
             return `
     <div class="container">
-        <div class="circle" id="badge-${product.id}">
-            ${cartState[product.id] || 1}
+        <div class="circle ${inCart ? 'show' : ''}" id="badge-${product.id}">
+            ${inCart ? cartState[product.id] : ''}
         </div>
 
         <div class="image-holder">
@@ -814,24 +815,30 @@
         }
 
         function removeFromCart(id) {
+            // remove from state
             delete cartState[id];
+
+            // DOM elements for this card
             const qtyEl = document.getElementById(`quantity-${id}`);
             const badgeEl = document.getElementById(`badge-${id}`);
-            const qtyWrap = document.getElementById(`qty-${product.id}`);
+            const qtyWrap = document.getElementById(`qty-${id}`);
             const removeBtn = document.getElementById(`remove-${id}`);
 
+            // Reset UI: hide quantity controls, hide remove button and badge, reset quantity display
             if (qtyEl) qtyEl.textContent = 1;
             if (badgeEl) {
-                badgeEl.textContent = 1;
+                badgeEl.textContent = '';
                 badgeEl.classList.remove('show');
             }
             if (qtyWrap) qtyWrap.classList.remove('show');
             if (removeBtn) removeBtn.classList.remove('show');
 
             // Haptic feedback (guarded)
-            tg && tg.HapticFeedback && tg.HapticFeedback.notificationOccurred('warning');
+            if (tg && tg.HapticFeedback && typeof tg.HapticFeedback.notificationOccurred === 'function') {
+                tg.HapticFeedback.notificationOccurred('warning');
+            }
 
-            // Update Order Badge (MainButton removed)
+            // Update badge that shows total items
             updateOrderBadge();
         }
 
@@ -965,7 +972,13 @@
 
             return { total, itemCount };
         }
-    </script>
-</body>
 
-</html>
+        // Load products
+        fetchProducts();
+        // Ensure order badge reflects initial cart state
+        // a
+        updateOrderBadge();
+     </script>
+ </body>
+ 
+ </html>
