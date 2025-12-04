@@ -6,7 +6,7 @@
                 "name": "Milk (500ml)",
                 "price": 28,
                 "unit": "pack",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             },
             {
                 "id": "DE002",
@@ -183,4 +183,5 @@
             }
         ]
     }
+
 }
