@@ -13,21 +13,21 @@
                 "name": "Curd (500g)",
                 "price": 32,
                 "unit": "pack",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             },
             {
                 "id": "DE003",
                 "name": "Bread",
                 "price": 35,
                 "unit": "pack",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             },
             {
                 "id": "DE004",
                 "name": "Eggs (6 pcs)",
                 "price": 45,
                 "unit": "box",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             }
         ],
         "groceries": [
@@ -36,35 +36,35 @@
                 "name": "Rice (1kg)",
                 "price": 55,
                 "unit": "kg",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             },
             {
                 "id": "GR002",
                 "name": "Wheat Flour (1kg)",
                 "price": 48,
                 "unit": "kg",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             },
             {
                 "id": "GR003",
                 "name": "Sugar (1kg)",
                 "price": 45,
                 "unit": "kg",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             },
             {
                 "id": "GR004",
                 "name": "Toor Dal (1kg)",
                 "price": 110,
                 "unit": "kg",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             },
             {
                 "id": "GR005",
                 "name": "Sunflower Oil (1L)",
                 "price": 140,
                 "unit": "litre",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             }
         ],
         "snacks": [
@@ -73,28 +73,28 @@
                 "name": "Potato Chips",
                 "price": 20,
                 "unit": "pack",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             },
             {
                 "id": "SN002",
                 "name": "Namkeen (200g)",
                 "price": 30,
                 "unit": "pack",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             },
             {
                 "id": "SN003",
                 "name": "Biscuits",
                 "price": 10,
                 "unit": "pack",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             },
             {
                 "id": "SN004",
                 "name": "Instant Noodles",
                 "price": 15,
                 "unit": "pack",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             }
         ],
         "beverages": [
@@ -103,21 +103,21 @@
                 "name": "Tea Powder (250g)",
                 "price": 90,
                 "unit": "pack",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             },
             {
                 "id": "BV002",
                 "name": "Coffee (50g)",
                 "price": 70,
                 "unit": "bottle",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             },
             {
                 "id": "BV003",
                 "name": "Soft Drink (500ml)",
                 "price": 40,
                 "unit": "bottle",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             }
         ],
         "personal_care": [
@@ -126,21 +126,21 @@
                 "name": "Bath Soap",
                 "price": 35,
                 "unit": "bar",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             },
             {
                 "id": "PC002",
                 "name": "Shampoo (100ml)",
                 "price": 55,
                 "unit": "bottle",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             },
             {
                 "id": "PC003",
                 "name": "Toothpaste (100g)",
                 "price": 55,
                 "unit": "tube",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             }
         ],
         "household": [
@@ -149,21 +149,21 @@
                 "name": "Detergent Powder (1kg)",
                 "price": 70,
                 "unit": "kg",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             },
             {
                 "id": "HH002",
                 "name": "Dishwashing Liquid (500ml)",
                 "price": 45,
                 "unit": "bottle",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             },
             {
                 "id": "HH003",
                 "name": "Floor Cleaner (1L)",
                 "price": 95,
                 "unit": "bottle",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             }
         ],
         "medical": [
@@ -172,16 +172,17 @@
                 "name": "Paracetamol (strip)",
                 "price": 20,
                 "unit": "strip",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             },
             {
                 "id": "MD002",
                 "name": "ORS Packet",
                 "price": 18,
                 "unit": "pack",
-                "image":"/27002.jpg"
+                "image":"https://github.com/ARAVIND-19/Telegram-Mini-app-testing/blob/main/27002.jpg?raw=true"
             }
         ]
     }
 
 }
+
